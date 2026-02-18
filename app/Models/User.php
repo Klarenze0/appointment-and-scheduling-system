@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'phone',
+        'avatar',
     ];
 
     /**
@@ -48,5 +51,33 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    // relationships
+    
+    public function staffProfiles() {
+        return $this->hasOne(StaffProfile::class);
+    }
+
+    public function appointments() {
+        return $this->hasMany(Appointment::class, 'client_id');
+    }
+
+    public function bookedAppointments() {
+        return $this->hasMany(Appointment::class, 'booked_by');
+    }
+
+    // role helper methods
+
+    public function isAdmin(): bool {
+        return $this->role === 'admin';
+    }
+
+    public function isStaff(): bool {
+        return $this->role === 'staff';
+    }
+
+    public function isClient(): bool {
+        return $this->role === 'client';
     }
 }

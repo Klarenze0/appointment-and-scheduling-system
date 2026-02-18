@@ -1,0 +1,5 @@
+! steps sa pag gawa 
+? iconnect yung db sa project
+? gumawa ng mga migration files
+? sa migration files gagawa ng tables para sa database
+? gumawa ng models para iconnect connect yung mga tables
